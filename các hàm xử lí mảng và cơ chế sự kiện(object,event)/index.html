@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>demo</title>
+
+	<style type="text/css" media="screen">
+		
+		#students-data li{
+			border: 1px solid #ccc;
+			background-color: #f4f4f4;
+			padding: 8px;
+  			height: 220px;
+			border-radius: 5px;
+			float: left;
+			list-style: none;
+			margin-left: 8px;
+		}
+	</style>		
+
+	<!-- các hàm xử lí mảng(array) thường dùng:
+		1. lenght - trả về độ dài của mảng array.lenght, có thể dùng để cắt độ dài của mảng, array.lenght = độ dài muốn thay đổi
+		2. join - Chuyển mảng sang dạng chuỗi array.join(kí tự phân cách);
+		3. push - thêm phần từ vào cuối mảng array.push(đối tượng muốn thêm);
+		4. pop - xoá phần từ cuối mản array.pop();
+		5. indexOf - trả về vị trí của phần từ trong mảng array.indexOf(phần từ muốn tìm);
+		6. Unshift - thêm 1 hoặc nhiều phần tử vào đầu mảng array.Unshift(phần tử);
+		7. Shift - xoá phần tử đầu tiền của mảng array.shift();
+		8. Splice - thêm phần tử vào mảng array theo vị trí xác định array(vị trí muốn thêm, số phần tử muốn xoá, đối tượng muốn thêm vào);
+		9. concat - hơp nhất 2 mảng array1.concat(array2);
+	   10. slice - lấy ra phần tử trong mảng theo vị trí array.slice(vị trí đầu, vị trí cuối);
+	   11. sort - sắp xếp mảng array.sort();
+	   12. reverse - đảo ngược mảng array.reverse();
+	 -->
+
+	 <script>
+
+		 var students = [];
+		 
+		 function renderView(){
+
+			var html = '';
+			for(var index = 0;index < students.length; index++){
+				var studentData = students[index];
+				html += '<li>';
+				html += '<h5> Id : ' + (index + 1) + '</h5>';
+				html += '<h5> Name: ' + studentData.name + '</h5>';
+				html += '<p> Age: ' + studentData.age + '</p>';
+				html += '<p> Address: ' + studentData.address + '</p>';
+				//tao button delete
+				html += '<button onclick="studentDelete('+ index + ')">delete</button>';
+				html += '</li>';
+			}
+
+			console.log(html);
+
+			//them html vao student-data
+			var container = document.getElementById("students-data");
+			container.innerHTML = html;
+
+
+		 }
+
+		 function studentDelete(index){
+			 students.splice(index,1);
+			 renderView();
+		 }
+	 	//khi load xong html thi moi chay javascript
+	 	document.addEventListener('DOMContentLoaded',function(){
+
+			//lay phan tu submit
+			 var submit_element = document.getElementById("submit");
+			 //bat su kien tren phan tu submit
+			 submit_element.addEventListener('click',function(){
+					var studentName = document.getElementById("name").value;
+					var studentAge = document.getElementById("age").value;
+					var studentAddress = document.getElementById("address").value;
+
+					var student = {
+						name : studentName,
+						age : studentAge,
+						address : studentAddress
+					};
+
+					console.log(students);
+
+					students.push(student);
+					renderView();
+			 });
+		 });
+	 </script>
+</head>
+<body>
+
+	<form action="">
+		<input id="name" placeholder="enterName">
+		<input type="text" id="age" placeholder="enterAge"/>
+		<input type="text" id="address" placeholder="enterAddress"/>
+		<input type="button" value="Create" id="submit"/>
+	</form>
+
+	<ul id="students-data">
+	</ul>
+	
+</body>
+</html>

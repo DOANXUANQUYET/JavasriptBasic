@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Home</title>
+</head>
+<body>
+	<h1 style="color: red">HomePage</h1>
+
+	<div>
+		<select id="selection-city">
+			
+		</select>
+	</div>
+	<script type="text/javascript">
+		var city = ["tokyo","osaka","chiba","kyoto","nagoya","kagoshima"];
+		var cnt = 0;
+		var selectValue = document.getElementById("selection-city");
+		var line = "";
+		while(cnt <= city.length){
+			line += "<option>" + city[cnt] + "</option>";
+			cnt++;
+		}
+		console.log(line);
+		selectValue.innerHTML = line;
+	</script>
+</body>
+</html>

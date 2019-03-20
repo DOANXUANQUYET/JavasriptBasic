@@ -1,0 +1,1 @@
+Tạo trang web lỗi và trở về trang chủ trong 5s
