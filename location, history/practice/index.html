@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="style.css" type="text/css">
+
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function() {
+            // Chúng ta có thể get 1 element con từ element cha như sau:
+
+
+            // Tham chiếu tới element cha
+            var tabsElement = document.querySelector('.tabs');
+            console.log('Parent: ', tabsElement);
+
+            // Từ element cha, tham chiếu tới element con của chính nó
+            var tabElement = tabsElement.getElementsByClassName('tab');
+            console.log('Children of above element: ', tabElement);
+            for (var cnt = 0; cnt < tabElement.length; cnt++) {
+                var tabChirlElement = tabElement[cnt];
+                //thêm sự kiện vào
+                tabChirlElement.onclick = function() {
+                    removeAllClass(tabElement, 'active');
+                    addClass(this, 'active');
+                }
+            }
+
+
+
+            function addClass(element, className) {
+                element.classList.add(className);
+            }
+
+            function removeAllClass(elements, className) {
+                for (cnt = 0; cnt < elements.length; cnt++) {
+                    var element = elements[cnt];
+                    element.classList.remove(className);
+                }
+            }
+        });
+
+        /*
+          Yêu cầu:
+            1. Click vào tab nào thì tab đó được active,
+            các tab được active trước đó phải được bỏ active đi
+
+            2. Khi tab nào được active, thì phần content của tab đó phải được hiển thị
+        */
+    </script>
+</head>
+
+<body>
+
+    <ul class="tabs">
+        <li class="tab active">
+            <a href="#">Tab 1</a>
+            <div class="tab-content">
+                <p>CONTENT OF TAB 1</p>
+                <h3>Mấy cái bài tập vớ vẩn này thì có là gì với đội Super dev đâu -_-</h3>
+            </div>
+        </li>
+
+        <li class="tab">
+            <a href="#">Tab 2</a>
+            <div class="tab-content">
+                CONTENT OF TAB 2
+            </div>
+        </li>
+
+        <li class="tab">
+            <a href="#">Tab 3</a>
+            <div class="tab-content">
+                CONTENT OF TAB 3
+            </div>
+        </li>
+
+        <li class="tab">
+            <a href="#">Tab 4</a>
+            <div class="tab-content">
+                CONTENT OF TAB 4
+            </div>
+        </li>
+
+        <li class="tab">
+            <a href="#">Tab 5</a>
+            <div class="tab-content">
+                CONTENT OF TAB 5
+            </div>
+        </li>
+
+        <li class="tab">
+            <a href="#">Tab 6</a>
+            <div class="tab-content">
+                CONTENT OF TAB 6
+            </div>
+        </li>
+    </ul>
+
+</body>
+
+</html>

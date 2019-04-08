@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>DOM event</title>
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        #btn {
+            font-size: 80px;
+            margin: 30px;
+            padding: 10px;
+            border: 3px solid red;
+            border-radius: 25px;
+        }
+        
+        #btn2 {
+            font-size: 80px;
+            margin: 30px;
+            padding: 10px;
+            border: 3px solid red;
+            border-radius: 25px;
+        }
+        
+        #btn3 {
+            font-size: 80px;
+            margin: 30px;
+            padding: 10px;
+            border: 3px solid red;
+            border-radius: 25px;
+        }
+    </style>
+
+    <script>
+        // hàm load bắt đầu chạy javascript
+        function onReady() {
+            var elementHeadding = document.getElementById('headding');
+            //dom event css, gồm set style và get style
+            //set style
+            elementHeadding.style.color = 'red';
+            //get style
+            var value = elementHeadding.style.color;
+            //console.log('đây là get style : ', value);
+
+            //dom event--------------------------
+            // onload : khi load xong
+            // onclick : khi click chuột
+            // ondblclick : khi click đúp chuột
+            // ononline : khi kết nối mạng
+            // onoffline : khi ngắt mạng
+            // onmousedown : khi người dùng click chuột xuống
+            // onmouseup : khi click chuột xong nhả ra
+            // onmouseover : khi di chuột vào một đối tượng cụ thể
+            // onmouseout : khi di chuột ra khỏi đối tượng đó
+            // onblur : khi click vào trong thẻ input và click ra ngoài
+            // onfocus : khi click vào trong thẻ input, con trỏ trong thẻ inout
+
+
+            //bắt sự kiên thông qua đối tượng html được gọi
+
+            var button3 = document.getElementById('btn3');
+            //gán sự kiện vào trong element bằng một hàm, thực hiện một hàm bên trong hàm đó
+            button3.onmouseout = function() {
+                onmouseOutEvent(this, 'red');
+            };
+            button3.onmouseover = function() {
+                onmouseOverEvent(this, 'green');
+            };
+
+            //bắt sự kiện bằng cách thêm lắng nghe sư kiện cho đối tượng
+            //hàm lắng nghe sự kiện sẽ kích hoạt hàm khi sư kiện được thực hiện trên đối tượng đó addEventListener('tên sự kiện bỏ on','hàm xử lý') thêm sư kiện
+            elementHeadding.addEventListener('mousedown', headdingClickEvent);
+
+            setTimeout(() => {
+                // xoá hàm của event bằng hàm removeEventListener('tên event bỏ on', tên hàm muốn xoá)
+                elementHeadding.removeEventListener('mousedown', headdingClickEvent);
+                //console.log('removed event listenner');
+            }, 3000);
+
+
+            //==========================lam thah menu 2 ========================================================================================================
+            // chọn các thẻ li trong menu
+            var menuButtonNodes = document.querySelectorAll('#nav > li');
+            for (var cnt = 0; cnt < menuButtonNodes.length; cnt++) {
+                var menuButtonNode = menuButtonNodes[cnt];
+                console.log(menuButtonNode);
+                //đợi sự kiện trong từng phần tử và khởi tạo giá trị của event
+                menuButtonNode.onmouseover = function() {
+                    //set ẩn (hide) tất cả các menu nhỏ
+                    var menuList = document.querySelectorAll('#nav .sub-menu');
+
+                    for (var i = 0; i < menuList.length; i++) {
+                        var menu = menuList[i];
+                        menu.style.display = 'none';
+                    }
+                    //lấy phần tử trong đối tượng được chọn
+                    var menuChild = this.getElementsByClassName('sub-menu');
+                    //thay đổi giá trị display
+                    menuChild[0].style.display = 'block';
+
+                }
+                menuButtonNode.onmouseout = function() {
+                    //set ẩn (hide) tất cả các menu nhỏ
+                    var menuList = document.querySelectorAll('#nav .sub-menu');
+
+                    for (var i = 0; i < menuList.length; i++) {
+                        var menu = menuList[i];
+                        menu.style.display = 'none';
+                    }
+                }
+            }
+        }; // ========================kết thúc onready()==============================
+
+        function headdingClickEvent() {
+            alert('onclick');
+        };
+
+        //ghi sự kiện trực tiếp vào trong thẻ html
+        function onclickEvent(e, color) {
+            e.style.color = color;
+        };
+
+        function onmouseOverEvent(e, color) {
+            e.style.color = color;
+        };
+
+        function onmouseOutEvent(e, color) {
+            e.style.color = color;
+        };
+    </script>
+</head>
+
+<!-- onload khi load html xong thi chay javascript -->
+
+<body onload="onReady();">
+
+    <div id="container">
+        <h1 id="headding"> Dom css, Dom event</h1>
+    </div>
+    <!-- cách viết sự kiện vào trong thể html và truyền hàm -->
+    <button id="btn" onclick="onclickEvent(this,'green')">click</button>
+    <button id="btn2" onmouseover="onmouseOverEvent(this,'blue')" onmouseout="onmouseOutEvent(this,'yellow')">hover</button>
+    <button id="btn3">hover</button>
+    <div id="container2">
+        <ul id="nav">
+            <li>
+                <a href="#">Home</a>
+                <ul class="sub-menu">
+                    <li><a href="#">Home 1</a></li>
+                    <li><a href="#">Home 2</a></li>
+                    <li><a href="#">Home 3</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">About</a>
+                <ul class="sub-menu">
+                    <li><a href="#">About 1</a></li>
+                    <li><a href="#">About 2</a></li>
+                    <li><a href="#">About 3</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">Product</a>
+                <ul class="sub-menu">
+                    <li><a href="#">Product 1</a></li>
+                    <li><a href="#">Product 2</a></li>
+                    <li><a href="#">Product 3</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">New</a>
+                <ul class="sub-menu">
+                    <li><a href="#">New 1</a></li>
+                    <li><a href="#">New 2</a></li>
+                    <li><a href="#">New 3</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">Contact</a>
+                <ul class="sub-menu">
+                    <li><a href="#">Contact 1</a></li>
+                    <li><a href="#">Contact 2</a></li>
+                    <li><a href="#">Contact 3</a></li>
+                </ul>
+            </li>
+            <div class="clear">
+
+            </div>
+        </ul>
+    </div>
+
+
+</body>
+
+</html>

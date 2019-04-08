@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>thao tác với DOM (document object model)</title>
+    <style>
+        .css-demo {
+            color: red;
+        }
+        
+        .css-demo2 {
+            background-color: yellow;
+        }
+    </style>
+    <script>
+        //thao tác xử lí load hmtl xong rồi chay javascript
+        document.addEventListener('DOMContentLoaded', function() {
+
+            //chọn đối tượng thông qua id
+            var headdingElement = document.getElementById('headding');
+            console.log('nội dung thẻ headding : ', headdingElement);
+
+            //chọn đối tượng thông qua class tra vè 1 collection getElementsclass
+            var classTextElement = document.getElementsByClassName('text');
+            console.log(classTextElement);
+
+            //chon đối tượng qua thẻ getElementByTagName trả về môt collection
+            var ElementTag = document.getElementsByTagName('p');
+            console.log(ElementTag);
+
+            //chọn đối tượng khai báo theo kiểu css qua trả về một list
+            var ElementCss = document.querySelectorAll("#waper .text");
+            console.log(ElementCss);
+
+            //innerHTML có thể lấy được toàn bộ nội dung HTML và thay đổi giá trị
+            var innerHeaddingHtml = headdingElement.innerHTML = 'hoc java cơ bản sau khi học xong javascript';
+            console.log(innerHeaddingHtml);
+
+            //innerText có thể lấy text trong đối tượng, chỉ lấy text thuần và chuyền vào text thuần
+            var innerTextDemo = document.getElementById('headding2');
+            var innerTextContent = innerTextDemo.innerText;
+            console.log(innerTextContent);
+            innerTextDemo.innerText = 'ví dụ <p> đây là text thuần, không phải HTML';
+
+            //getAttribute(truyền vào tên attribute) là lấy thuộc tính của đối tượng html đang chọn
+            var attributeName = innerTextDemo.getAttribute('class');
+            //trả về tên thuộc tính của class
+            console.log('giá trị attribute before : ', attributeName);
+
+            //setAttribute(truyền vào tên attribute,và giá trị thay thế) có thể thay đổi thuộc tính của đối tượng html được chọn
+            attributeName = innerTextDemo.setAttribute('class', 'css-demo css-demo2');
+            console.log('giá trị attribute after : ', attributeName);
+
+        });
+    </script>
+</head>
+
+<body>
+
+    <div id="waper">
+
+        <h1 id="headding">chọn đối tượng thông qua <span>id </span>(getElementById)</h1>
+        <h1 id="headding2" class="css-demo">example innerText</h1>
+
+        <p class="text">lấy đối tượng qua class</p>
+        <p class="text">lấy đối tượng qua class</p>
+        <p class="text">lấy đối tượng qua class</p>
+        <p class="text">lấy đối tượng qua class</p>
+        <p class="text">lấy đối tượng qua class</p>
+        <p>lấy đối tượng qua getElementByTagName</p>
+        <p>lấy đối tượng qua getElementByTagName</p>
+        <p>lấy đối tượng qua getElementByTagName</p>
+        <p>lấy đối tượng qua getElementByTagName</p>
+
+
+    </div>
+
+
+</body>
+
+</html>
